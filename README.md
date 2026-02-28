@@ -1,6 +1,8 @@
 # 🚜 Farm Equipment Maintenance Predictor
 
-A machine learning project that predicts whether industrial farm equipment needs maintenance based on real-time sensor readings — directly relevant to predictive maintenance systems used in precision agriculture.
+A machine learning + Tableau project that predicts whether industrial farm equipment needs maintenance based on real-time sensor readings — directly relevant to predictive maintenance systems used in precision agriculture.
+
+🔗 **[View Live Tableau Dashboard](https://public.tableau.com/app/profile/prasidham.sinha/viz/farm_eqp_failure_dashboard/Dashboard1)**
 
 ---
 
@@ -8,7 +10,7 @@ A machine learning project that predicts whether industrial farm equipment needs
 
 Unplanned equipment failure during harvest season can cost farmers thousands of dollars per day. Early detection using on-board sensor data allows maintenance teams to act **before** a breakdown happens — not after.
 
-This project uses a real-world industrial sensor dataset (AI4I 2020) to build a binary classifier that flags machines at risk of failure.
+This project uses a real-world industrial sensor dataset (AI4I 2020) to build a binary classifier that flags machines at risk of failure, paired with an operational monitoring dashboard.
 
 ---
 
@@ -34,7 +36,7 @@ This project uses a real-world industrial sensor dataset (AI4I 2020) to build a 
 
 Boxplot analysis revealed that **Rotational Speed** and **Torque** had the most outliers — machines operating outside normal ranges in these sensors were most likely to fail.
 
-![Sensor Distributions](sensor_distribution.png)
+![Sensor Distributions](sensor_distributions.png)
 
 ---
 
@@ -42,13 +44,14 @@ Boxplot analysis revealed that **Rotational Speed** and **Torque** had the most 
 
 | Step | What I did |
 |---|---|
-| 1 | Loaded and explored the dataset |
+| 1 | Loaded and explored the real AI4I dataset |
 | 2 | Identified class imbalance (96.6% OK, 3.4% failure) |
 | 3 | Split data 80/20 train/test |
-| 4 | Scaled features using StandardScaler |
+| 4 | Scaled features using StandardScaler to prevent dominance |
 | 5 | Trained Logistic Regression (baseline) |
 | 6 | Identified accuracy paradox — 97% accuracy but only 26% recall |
-| 7 | Fixed using `class_weight='balanced'` — recall improved to 85% |
+| 7 | Fixed using class_weight='balanced' — recall improved to 85% |
+| 8 | Built operational monitoring dashboard in Tableau |
 
 ---
 
@@ -86,11 +89,28 @@ Only **9 failing machines** slipped through undetected out of 61 total failures.
 
 ---
 
+## 📊 Tableau Dashboard
+
+An operational monitoring dashboard built to visualise model predictions alongside key fleet KPIs.
+
+![Tableau Dashboard](tableau_dashboard.png)
+
+🔗 **[Open Interactive Dashboard](https://public.tableau.com/app/profile/prasidham.sinha/viz/farm_eqp_failure_dashboard/Dashboard1)**
+
+**Dashboard includes:**
+- KPI tiles — Total Machines, Total Failures, Failure Rate %
+- Scatter plot — RPM vs Torque coloured by failure status (red = failure)
+- Bar chart — OK vs Failure machine count
+
+**Key visual insight:** Failures cluster in the top-left of the RPM vs Torque scatter plot — high torque + low RPM is a strong predictor of mechanical stress and failure risk.
+
+---
+
 ## 💡 What I'd Do Next
 
 - Try **Random Forest or XGBoost** to improve precision without losing recall
 - Use **SMOTE** (synthetic oversampling) to handle class imbalance differently
-- Build a **real-time scoring dashboard** in Power BI for fleet managers
+- Connect dashboard to a **live data stream** for real-time fleet monitoring
 - Add **time-series analysis** to predict failure X hours in advance
 
 ---
@@ -106,7 +126,7 @@ Only **9 failing machines** slipped through undetected out of 61 total failures.
 
 ## 🛠️ Tools & Libraries
 
-`Python` `Pandas` `NumPy` `Scikit-learn` `Matplotlib` `Jupyter Notebook`
+`Python` `Pandas` `NumPy` `Scikit-learn` `Matplotlib` `Tableau` `Jupyter Notebook`
 
 ---
 
