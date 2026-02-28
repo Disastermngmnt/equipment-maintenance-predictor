@@ -34,7 +34,7 @@ This project uses a real-world industrial sensor dataset (AI4I 2020) to build a 
 
 Boxplot analysis revealed that **Rotational Speed** and **Torque** had the most outliers — machines operating outside normal ranges in these sensors were most likely to fail.
 
-![Sensor Distributions](sensor_distributions.png)
+![Sensor Distributions](sensor_distribution.png)
 
 ---
 
